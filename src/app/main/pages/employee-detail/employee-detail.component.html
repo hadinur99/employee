@@ -1,0 +1,40 @@
+<h1 class="text-center">Detail Employee</h1>
+
+<div class="employee-details-container">
+  <div class="employee-detail">
+    <span class="label">Username:</span>
+    <span>{{ employee.username }}</span>
+  </div>
+  <div class="employee-detail">
+    <span class="label">First Name:</span>
+    <span>{{ employee.firstName }}</span>
+  </div>
+  <div class="employee-detail">
+    <span class="label">Last Name:</span>
+    <span>{{ employee.lastName }}</span>
+  </div>
+  <div class="employee-detail">
+    <span class="label">Email:</span>
+    <span>{{ employee.email }}</span>
+  </div>
+  <div class="employee-detail">
+    <span class="label">Birth Date:</span>
+    <span>{{ employee.birthDate }}</span>
+  </div>
+  <div class="employee-detail">
+    <span class="label">Basic Salary:</span>
+    <span>{{ employee.basicSalary | currencyIDR }}</span>
+  </div>
+  <div class="employee-detail">
+    <span class="label">Status:</span>
+    <span>{{ employee.status }}</span>
+  </div>
+  <div class="employee-detail">
+    <span class="label">Group:</span>
+    <span>{{ employee.group }}</span>
+  </div>
+  <div class="employee-detail">
+    <span class="label">Description:</span>
+    <span>{{ employee.description }}</span>
+  </div>
+</div>

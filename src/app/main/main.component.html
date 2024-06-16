@@ -1,0 +1,15 @@
+<mat-toolbar>
+  <button mat-icon-button class="example-icon" [routerLink]="'/employee-list'">
+    <mat-icon>home</mat-icon>
+  </button>
+  <strong>Employee-web</strong>
+  <span class="example-spacer"></span>
+
+  <button mat-icon-button class="example-icon" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

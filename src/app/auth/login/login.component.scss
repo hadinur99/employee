@@ -1,0 +1,46 @@
+.login {
+  height: 100vh;
+}
+
+.box {
+  top: 200px;
+  position: relative;
+  flex-direction: row;
+  max-width: 1000px;
+  margin: auto;
+
+  &__bg-left {
+    @media screen and (max-width: 767px) {
+      display: none;
+      margin: 20px;
+    }
+  }
+
+  &__form {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    margin-top: 15px;
+    width: 400px;
+    padding: 2em;
+    @media screen and (max-width: 767px) {
+      margin: 20px;
+    }
+  }
+}
+
+.logo {
+  &__img {
+    width: 250px;
+  }
+}
+.img-bg {
+  width: 450px;
+}
+
+:host ::ng-deep {
+  .toast {
+    background-color: red;
+    width: 300px;
+    height: 80px;
+  }
+}
