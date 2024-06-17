@@ -19,6 +19,11 @@ export class AuthenticationService {
     if (loginForm.username === 'admin' && loginForm.password === 'admin') {
       this.loggedIn = true;
       this.router.navigate(['/employee-list']);
+      this._snackBar.open('Berhasil Login!', '', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        duration: 3000,
+      });
       return true;
     } else {
       this._snackBar.open('Password Salah!', 'Coba Lagi!', {

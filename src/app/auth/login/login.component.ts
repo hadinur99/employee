@@ -5,7 +5,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthenticationService } from '../../_services/authentication.service';
 
@@ -27,7 +26,6 @@ export class LoginComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private authService: AuthenticationService
   ) {}
 
@@ -45,7 +43,6 @@ export class LoginComponent {
   }
 
   onLogin() {
-    console.log('login', this.loginForm.value);
     this.authService.login(this.loginForm.value);
   }
 }
