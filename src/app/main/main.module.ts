@@ -18,13 +18,20 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { EmployeeDetailComponent } from './pages/employee-detail/employee-detail.component';
 import { CurrencyIDR } from '../_utils/currency-idr.pipe';
-
+import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
+import {
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 @NgModule({
   declarations: [
     EmployeeListComponent,
     EmployeeAddComponent,
     EmployeeDetailComponent,
     CurrencyIDR,
+    ConfirmDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +45,11 @@ import { CurrencyIDR } from '../_utils/currency-idr.pipe';
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
+
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
 
     ReactiveFormsModule,
     MatNativeDateModule,

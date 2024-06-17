@@ -6,8 +6,9 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EMPLOYEES } from '../../../_models/data-dummy-employee';
+import { EmployeeService } from '../../../_services/employee.service';
 
 @Component({
   selector: 'app-employee-add',
@@ -18,43 +19,53 @@ export class EmployeeAddComponent {
   title!: string;
   username!: string | null;
   employeeFormGroup!: FormGroup;
+  isEdit = false;
   groups = [
-    'Group 1',
-    'Group 2',
-    'Group 3',
-    'Group 4',
-    'Group 5',
-    'Group 6',
-    'Group 7',
-    'Group 8',
-    'Group 9',
-    'Group 10',
+    'Group1',
+    'Group2',
+    'Group3',
+    'Group4',
+    'Group5',
+    'Group6',
+    'Group7',
+    'Group8',
+    'Group9',
+    'Group10',
   ];
+
+  statuses = ['Active', 'Inactive'];
 
   constructor(
     private fb: FormBuilder,
     private loc: Location,
-    private route: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private employeeService: EmployeeService,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
-    const employees = EMPLOYEES;
-    this.username = this.route.snapshot.paramMap.get('username');
+    const employees = this.employeeService.getEmployees();
+    this.username = this.activatedRoute.snapshot.paramMap.get('username');
+    if (this.username) {
+      this.isEdit = true;
+    }
 
-    const employee = employees.find((emp) => emp.username === this.username);
-    // console.log('u', employees);
+    const employee = employees.find(
+      (emp: { username: string | null }) => emp.username === this.username
+    );
     this.buildForm();
 
     if (employee) {
       this.title = 'Edit Employee';
-      console.log('em', employee);
       this.employeeFormGroup.setValue({
+        username: employee?.username,
         firstName: employee?.firstName,
         lastName: employee?.lastName,
         birthDate: employee?.birthDate,
         email: employee?.email,
         basicSalary: employee?.basicSalary,
         group: employee?.group,
+        status: employee?.status,
       });
     } else {
       this.title = 'Add Employee';
@@ -63,12 +74,14 @@ export class EmployeeAddComponent {
 
   private buildForm() {
     this.employeeFormGroup = this.fb.group({
+      username: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       birthDate: ['', [Validators.required, this.dateValidator]],
       email: ['', [Validators.required, Validators.email]],
       basicSalary: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       group: ['', Validators.required],
+      status: [''],
     });
   }
 
@@ -80,7 +93,13 @@ export class EmployeeAddComponent {
   onSave(): void {
     if (this.employeeFormGroup.valid) {
       // Save the data
-      console.log('Employee Data:', this.employeeFormGroup.value);
+      const newEmployee = this.employeeFormGroup.value;
+      if (this.isEdit) {
+        this.employeeService.updateEmployees(newEmployee);
+      } else {
+        this.employeeService.addEmployee(newEmployee);
+      }
+      this.route.navigateByUrl('/employee-list');
     }
   }
 

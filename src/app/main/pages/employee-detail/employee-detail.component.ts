@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeData } from '../../../_models/employee';
 import { ActivatedRoute } from '@angular/router';
 import { EMPLOYEES } from '../../../_models/data-dummy-employee';
+import { EmployeeService } from '../../../_services/employee.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-employee-detail',
@@ -12,13 +14,19 @@ export class EmployeeDetailComponent implements OnInit {
   employee!: any;
   username!: string | null;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private employeeService: EmployeeService,
+    private loc: Location
+  ) {}
 
   ngOnInit(): void {
-    const employees = EMPLOYEES;
+    const employees = this.employeeService.getEmployees();
     this.username = this.route.snapshot.paramMap.get('username');
 
-    this.employee = employees.find((emp) => emp.username === this.username);
+    this.employee = employees.find(
+      (emp: { username: string | null }) => emp.username === this.username
+    );
   }
 
   convertCurrency(key: number) {
@@ -27,5 +35,9 @@ export class EmployeeDetailComponent implements OnInit {
       currency: 'IDR',
     });
     return formatter.format(key);
+  }
+
+  back() {
+    this.loc.back();
   }
 }
