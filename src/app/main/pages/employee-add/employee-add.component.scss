@@ -1,9 +1,22 @@
 /* add-employee.component.css */
-form {
+.form {
   display: flex;
-  flex-direction: column;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .form {
+    flex-direction: column;
+    gap: 0;
+  }
 }
 
 mat-form-field {
+  width: 100%;
   margin-bottom: 16px;
+}
+
+.action {
+  display: flex;
+  gap: 10px;
 }

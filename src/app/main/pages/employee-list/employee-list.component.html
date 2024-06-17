@@ -18,7 +18,7 @@
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
       <!-- Define your columns here -->
-      <ng-container matColumnDef="username">
+      <ng-container matColumnDef="username" sticky>
         <th mat-header-cell *matHeaderCellDef>Username</th>
         <td mat-cell *matCellDef="let data">{{ data.username }}</td>
       </ng-container>
