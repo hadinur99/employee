@@ -27,6 +27,8 @@ export class EmployeeListComponent implements OnInit, AfterViewInit {
 
   private filterSubject = new Subject<string>();
 
+  filterValue: string = '';
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -47,14 +49,24 @@ export class EmployeeListComponent implements OnInit, AfterViewInit {
     this.filterSubject.pipe(debounceTime(300)).subscribe((filterValue) => {
       this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
     });
+
+    this.filterValue = this.employeeService.getFilterValue();
+    this.applyFilter(this.filterValue);
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
-  applyFilter(e: Event): void {
-    const filterValue = (e.target as HTMLInputElement).value;
+  applyFilter(e?: any): void {
+    let filterValue;
+    if (e?.target) {
+      filterValue = (e?.target as HTMLInputElement).value;
+    } else {
+      filterValue = e;
+    }
+
+    this.employeeService.setFilterValue(filterValue);
     this.filterSubject.next(filterValue);
   }
 

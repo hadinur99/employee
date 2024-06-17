@@ -8,8 +8,10 @@ export class EmployeeService {
   //   private employees = EMPLOYEES;
 
   private employeesSubject = new BehaviorSubject<any>(EMPLOYEES);
-
   employees$ = this.employeesSubject.asObservable();
+
+  private filterSubject = new BehaviorSubject<string>('');
+  filter$ = this.filterSubject.asObservable();
 
   constructor() {}
 
@@ -30,5 +32,13 @@ export class EmployeeService {
           : employee
     );
     this.employeesSubject.next(updatedEmployees);
+  }
+
+  setFilterValue(value: string): void {
+    this.filterSubject.next(value);
+  }
+
+  getFilterValue(): string {
+    return this.filterSubject.value;
   }
 }

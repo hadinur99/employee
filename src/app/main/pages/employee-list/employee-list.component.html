@@ -6,7 +6,13 @@
     <div style="display: flex">
       <mat-form-field>
         <mat-label>Search Employee</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. John" />
+        <!-- <input matInput (keyup)="applyFilter($event)" placeholder="Ex. John" /> -->
+        <input
+          matInput
+          [(ngModel)]="filterValue"
+          (keyup)="applyFilter($event)"
+          placeholder="Ex. John"
+        />
       </mat-form-field>
       <span class="example-spacer"></span>
       <button mat-flat-button color="primary" (click)="addEmployee()">
