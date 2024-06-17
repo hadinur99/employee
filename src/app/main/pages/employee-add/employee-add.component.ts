@@ -20,6 +20,7 @@ export class EmployeeAddComponent {
   username!: string | null;
   employeeFormGroup!: FormGroup;
   isEdit = false;
+  maxDate!: Date;
   groups = [
     'Group1',
     'Group2',
@@ -44,6 +45,7 @@ export class EmployeeAddComponent {
   ) {}
 
   ngOnInit(): void {
+    this.maxDate = new Date();
     const employees = this.employeeService.getEmployees();
     this.username = this.activatedRoute.snapshot.paramMap.get('username');
     if (this.username) {
