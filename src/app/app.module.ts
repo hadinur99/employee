@@ -18,18 +18,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { MainModule } from './main/main.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-// import { CurrencyIDR } from './_utils/currency-idr.pipe';
 
-const matModule = [
+const modules = [
   MatFormFieldModule,
   MatInputModule,
   MatButtonModule,
-  // MatTableModule,
-  // MatPaginatorModule,
   MatSortModule,
   MatSnackBarModule,
   MatToolbarModule,
   MatIconModule,
+  FormsModule,
+  ReactiveFormsModule,
 ];
 @NgModule({
   declarations: [AppComponent, LoginComponent, MainComponent],
@@ -38,9 +37,7 @@ const matModule = [
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ...matModule,
+    ...modules,
   ],
   providers: [],
   bootstrap: [AppComponent],

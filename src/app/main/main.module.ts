@@ -17,7 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { EmployeeDetailComponent } from './pages/employee-detail/employee-detail.component';
-import { CurrencyIDR } from '../_utils/currency-idr.pipe';
+import { PipeCurrencyIDR } from '../_utils/currency-idr.pipe';
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 import {
   MatDialogActions,
@@ -25,38 +25,41 @@ import {
   MatDialogContent,
   MatDialogTitle,
 } from '@angular/material/dialog';
+
+const components = [
+  EmployeeListComponent,
+  EmployeeAddComponent,
+  EmployeeDetailComponent,
+  ConfirmDialogComponent,
+];
+
+const modules = [
+  MatTableModule,
+  MatPaginatorModule,
+  MatFormField,
+  MatFormFieldModule,
+  MatToolbarModule,
+  MatInputModule,
+  MatIconModule,
+  MatButtonModule,
+  MatTooltipModule,
+  FormsModule,
+  ReactiveFormsModule,
+  MatNativeDateModule,
+  MatDatepickerModule,
+  MatSelectModule,
+];
+
 @NgModule({
-  declarations: [
-    EmployeeListComponent,
-    EmployeeAddComponent,
-    EmployeeDetailComponent,
-    CurrencyIDR,
-    ConfirmDialogComponent,
-  ],
+  declarations: [...components, PipeCurrencyIDR],
   imports: [
     CommonModule,
     MainRoutingModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatFormField,
-    MatFormFieldModule,
-    MatToolbarModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    FormsModule,
-
+    ...modules,
     MatDialogTitle,
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
-
-    ReactiveFormsModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-
-    MatSelectModule,
   ],
 })
 export class MainModule {}

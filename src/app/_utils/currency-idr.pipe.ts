@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'currencyIDR',
 })
-export class CurrencyIDR implements PipeTransform {
+export class PipeCurrencyIDR implements PipeTransform {
   transform(value: number): string {
     if (value == null) {
       return '';
