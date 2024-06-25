@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { ConvertCurrency } from './utils';
 
 @Pipe({
   name: 'currencyIDR',
@@ -10,9 +11,6 @@ export class PipeCurrencyIDR implements PipeTransform {
     }
 
     // Format the number to IDR currency
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-    }).format(value);
+    return ConvertCurrency(value);
   }
 }
