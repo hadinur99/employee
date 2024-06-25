@@ -7,8 +7,8 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPLOYEES } from '../../../_models/data-dummy-employee';
 import { EmployeeService } from '../../../_services/employee.service';
+import { DialogService } from '../../../_services/dialog-service.service';
 
 @Component({
   selector: 'app-employee-add',
@@ -41,7 +41,8 @@ export class EmployeeAddComponent {
     private loc: Location,
     private activatedRoute: ActivatedRoute,
     private employeeService: EmployeeService,
-    private route: Router
+    private route: Router,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -98,8 +99,13 @@ export class EmployeeAddComponent {
       const newEmployee = this.employeeFormGroup.value;
       if (this.isEdit) {
         this.employeeService.updateEmployees(newEmployee);
+        this.dialogService.snackBarDialog('Edit data employee berhasil!', 'Ok');
       } else {
         this.employeeService.addEmployee(newEmployee);
+        this.dialogService.snackBarDialog(
+          'Tambah data employee berhasil!',
+          'Ok'
+        );
       }
       this.route.navigateByUrl('/employee-list');
     }

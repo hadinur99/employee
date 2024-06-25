@@ -20,18 +20,26 @@ export class EmployeeService {
   }
 
   addEmployee(newEmployee: EmployeeData): void {
-    const updatedEmployees = [...this.getEmployees(), newEmployee];
-    this.employeesSubject.next(updatedEmployees);
+    try {
+      const updatedEmployees = [...this.getEmployees(), newEmployee];
+      this.employeesSubject.next(updatedEmployees);
+    } catch (error) {
+      console.error('Failed to update employees', error);
+    }
   }
 
   updateEmployees(updatedEmployee: EmployeeData): void {
-    const updatedEmployees = this.getEmployees().map(
-      (employee: { username: string }) =>
-        employee.username === updatedEmployee.username
-          ? updatedEmployee
-          : employee
-    );
-    this.employeesSubject.next(updatedEmployees);
+    try {
+      const updatedEmployees = this.getEmployees().map(
+        (employee: { username: string }) =>
+          employee.username === updatedEmployee.username
+            ? updatedEmployee
+            : employee
+      );
+      this.employeesSubject.next(updatedEmployees);
+    } catch (error) {
+      console.error('Failed to update employees', error);
+    }
   }
 
   setFilterValue(value: string): void {
