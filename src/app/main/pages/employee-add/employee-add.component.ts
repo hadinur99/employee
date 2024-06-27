@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../../../_services/employee.service';
 import { DialogService } from '../../../_services/dialog-service.service';
+import { EmployeeData } from '../../../_models/employee';
 
 @Component({
   selector: 'app-employee-add',
@@ -98,17 +99,22 @@ export class EmployeeAddComponent {
       // Save the data
       const newEmployee = this.employeeFormGroup.value;
       if (this.isEdit) {
-        this.employeeService.updateEmployees(newEmployee);
-        this.dialogService.snackBarDialog('Edit data employee berhasil!', 'Ok');
+        this.editEmployeeData(newEmployee);
       } else {
-        this.employeeService.addEmployee(newEmployee);
-        this.dialogService.snackBarDialog(
-          'Tambah data employee berhasil!',
-          'Ok'
-        );
+        this.addEmployeeData(newEmployee);
       }
       this.route.navigateByUrl('/employee-list');
     }
+  }
+
+  addEmployeeData(newEmployee: EmployeeData) {
+    this.employeeService.addEmployee(newEmployee);
+    this.dialogService.snackBarDialog('Tambah data employee berhasil!', 'Ok');
+  }
+
+  editEmployeeData(updatedEmployee: EmployeeData) {
+    this.employeeService.updateEmployees(updatedEmployee);
+    this.dialogService.snackBarDialog('Edit data employee berhasil!', 'Ok');
   }
 
   onCancel(): void {
