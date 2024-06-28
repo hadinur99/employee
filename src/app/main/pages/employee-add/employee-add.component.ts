@@ -81,17 +81,12 @@ export class EmployeeAddComponent {
       username: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      birthDate: ['', [Validators.required, this.dateValidator]],
+      birthDate: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       basicSalary: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       group: ['', Validators.required],
       status: [''],
     });
-  }
-
-  dateValidator(control: AbstractControl): { [key: string]: boolean } | null {
-    const today = new Date().toISOString().split('T')[0];
-    return control.value > today ? { invalidDate: true } : null;
   }
 
   onSave(): void {
